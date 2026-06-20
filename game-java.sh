@@ -9,7 +9,11 @@
 #  - sort le jeu du cgroup snap.code (terminal VSCode) via systemd-run, ce qui
 #      remet oom_score_adj à 0 : le jeu n'est plus la cible prioritaire de l'OOM.
 #  - lance le vrai Java 8
-PALA="$HOME/Desktop/Paladium"
+#
+# PALA = dossier des ressources Linux (linux-natives/, patches/). Il est injecté
+# par launch-paladium.sh au déploiement (= racine du dépôt). Le défaut ci-dessous
+# ne sert que si game-java.sh est lancé à la main hors de ce flux.
+PALA="${PALADIUM_SUPPORT_DIR:-$HOME/Desktop/Paladium}"
 
 # RAM max du jeu en Mo (surchargable : PALADIUM_MAX_RAM=3072 ./launch-paladium.sh)
 #

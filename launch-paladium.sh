@@ -89,8 +89,12 @@ fi
 
 # ---------------------------------------------------------------------------
 # 2. Déployer le wrapper Java du jeu (RAM cap + natives Linux + hors cgroup snap).
+#    On fige PALA = racine du dépôt (où vivent linux-natives/ et patches/) pour
+#    que le wrapper retrouve les natives quel que soit le nom du dossier cloné.
 # ---------------------------------------------------------------------------
+[ -d "$ROOT/linux-natives" ] || echo "[warn] $ROOT/linux-natives introuvable : natives Linux non déployés (le jeu plantera sur 'no lwjgl_pala'). Voir le README." >&2
 cp -f "$GAME_JAVA_SRC" "$GAME_JAVA_DST"
+sed -i "s|^PALA=.*|PALA=\"$ROOT\"|" "$GAME_JAVA_DST"
 chmod +x "$GAME_JAVA_DST"
 
 # ---------------------------------------------------------------------------

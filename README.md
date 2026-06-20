@@ -27,8 +27,20 @@ sudo apt install default-jre python3
 ```
 
 Plus le launcher officiel **`Paladium Games Launcher.jar`** (téléchargé depuis le
-site Paladium) placé dans `Launcher/`. Le reste (runtime Java 8, `launcher.jar`,
-mods, natives) est récupéré automatiquement au premier lancement.
+site Paladium) placé dans `Launcher/`. Le runtime Java 8, `launcher.jar`, les mods
+et les natives Windows sont récupérés automatiquement au premier lancement.
+
+⚠️ **À fournir soi-même** (non redistribués, non téléchargés par le bootstrap),
+à placer à la racine du dépôt — sinon le jeu plante sur `no lwjgl_pala in
+java.library.path` :
+
+- `linux-natives/` — les `.so` LWJGL/OpenAL/JInput compilés pour Linux
+  (`liblwjgl_pala.so`, `liblwjgl_pala64.so`, `libopenal*.so`, `libjinput-linux*.so`).
+- `patches/Apollon-9.1.0.pala` — version corrigée du mod Boutique (optionnel).
+
+`launch-paladium.sh` doit être lancé **depuis la racine du dépôt** (là où se
+trouvent ces dossiers) : le chemin est résolu automatiquement, peu importe le nom
+du dossier cloné.
 
 ## Utilisation
 
