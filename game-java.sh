@@ -41,18 +41,6 @@ done
 JAVA="$HOME/paladium-games/runtime/bin/java"
 echo "[game-java] heap plafonné : -Xms${MIN_RAM}M -Xmx${MAX_RAM}M (RAM système : $(free -m | awk '/^Mem:/{print $2"Mo, libre "$7"Mo dispo"}'))" >&2
 
-# --- GPU : rendre sur le GPU dédié NVIDIA (offload PRIME) plutôt que l'iGPU AMD ---
-# Par défaut Linux rend sur l'iGPU AMD Vega, qui pioche sa VRAM dans la RAM système
-# (déjà saturée sur cette machine 7 Go). La GTX 1650 a 4 Go de VRAM DÉDIÉE : y
-# basculer le rendu = bien plus de FPS ET de la RAM système rendue au jeu (moins
-# d'OOM). Désactivable avec PALADIUM_GPU=igpu ./launch-paladium.sh
-if [ "${PALADIUM_GPU:-nvidia}" = "nvidia" ] && command -v nvidia-smi >/dev/null 2>&1; then
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __VK_LAYER_NV_optimus=NVIDIA_only   # idem pour un éventuel backend Vulkan
-    echo "[game-java] rendu GPU : NVIDIA GTX 1650 (offload PRIME) — VRAM dédiée, RAM préservée" >&2
-fi
-
 # Lance le jeu dans un scope systemd --user dédié → hors du cgroup snap.code,
 # donc oom_score_adj=0 (le jeu n'est plus tué en priorité par le noyau).
 if command -v systemd-run >/dev/null 2>&1 && systemd-run --user --scope true >/dev/null 2>&1; then

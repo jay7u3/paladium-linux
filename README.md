@@ -17,7 +17,7 @@ redistribués ici et sont téléchargés/installés à la première exécution.
 |---------|------|
 | [launch-paladium.sh](launch-paladium.sh) | Point d'entrée. Installe le runtime, régénère le launcher patché, corrige les certificats TLS, lance le jeu. |
 | [build-patched-launcher.py](build-patched-launcher.py) | Patche le `launcher.jar` officiel (bytecode) pour débloquer l'install Linux, le curseur RAM et injecter le Java du jeu. |
-| [game-java.sh](game-java.sh) | Wrapper Java du jeu : natives LWJGL Linux, plafond RAM (anti-OOM), **rendu sur le GPU NVIDIA dédié**. |
+| [game-java.sh](game-java.sh) | Wrapper Java du jeu : natives LWJGL Linux, plafond RAM (anti-OOM). |
 | [certs-fix/](certs-fix/) | Certificats CA publics manquants (GTS Root R4 / WE1) ré-injectés dans le keystore pour réparer l'authentification. |
 
 ## Prérequis
@@ -41,15 +41,8 @@ Lancements suivants : direct.
 
 ## Réglages utiles
 
-**GPU** — le rendu est forcé sur la **NVIDIA GTX 1650** (offload PRIME) au lieu
-de l'iGPU AMD. Pour revenir à l'iGPU :
-
-```bash
-PALADIUM_GPU=igpu ./launch-paladium.sh
-```
-
-**RAM** — le heap du jeu est plafonné pour éviter l'OOM killer (machine 7 Go).
-Ajustable :
+**RAM** — le heap du jeu est plafonné pour éviter l'OOM killer sur les machines
+à faible mémoire. Ajustable :
 
 ```bash
 PALADIUM_MAX_RAM=3072 ./launch-paladium.sh   # plus de RAM si tu as fermé d'autres apps
