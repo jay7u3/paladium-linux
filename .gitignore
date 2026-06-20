@@ -2,11 +2,15 @@
 # Récupérés automatiquement par le bootstrap, ou à placer soi-même (voir README).
 Launcher/
 patches/
-linux-natives/
 *.exe
 *.jar
 *.pala
+
+# --- Natives Linux open-source (BSD/LGPL) : redistribuables, voir linux-natives/LICENSES.md ---
+# On ignore les .so par défaut puis on ré-autorise explicitement ceux de linux-natives/.
 *.so
+!linux-natives/
+!linux-natives/*.so
 
 # --- Réglages locaux Claude Code ---
 .claude/

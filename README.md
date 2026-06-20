@@ -30,13 +30,15 @@ Plus le launcher officiel **`Paladium Games Launcher.jar`** (téléchargé depui
 site Paladium) placé dans `Launcher/`. Le runtime Java 8, `launcher.jar`, les mods
 et les natives Windows sont récupérés automatiquement au premier lancement.
 
-⚠️ **À fournir soi-même** (non redistribués, non téléchargés par le bootstrap),
-à placer à la racine du dépôt — sinon le jeu plante sur `no lwjgl_pala in
-java.library.path` :
+Les natives Linux (`linux-natives/`) sont **incluses dans le dépôt** : ce sont
+des bibliothèques open-source (LWJGL/JInput en BSD, OpenAL Soft en LGPL),
+redistribuables — voir [linux-natives/LICENSES.md](linux-natives/LICENSES.md).
 
-- `linux-natives/` — les `.so` LWJGL/OpenAL/JInput compilés pour Linux
-  (`liblwjgl_pala.so`, `liblwjgl_pala64.so`, `libopenal*.so`, `libjinput-linux*.so`).
-- `patches/Apollon-9.1.0.pala` — version corrigée du mod Boutique (optionnel).
+⚠️ **À fournir soi-même** (propriétaires Paladium, non redistribués) :
+
+- `Launcher/Paladium Games Launcher.jar` — le bootstrap officiel (obligatoire).
+- `patches/Apollon-9.1.0.pala` — version corrigée du mod Boutique (optionnel ;
+  sans lui le jeu se lance, seul le bouton Boutique plante).
 
 `launch-paladium.sh` doit être lancé **depuis la racine du dépôt** (là où se
 trouvent ces dossiers) : le chemin est résolu automatiquement, peu importe le nom
