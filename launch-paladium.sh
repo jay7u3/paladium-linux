@@ -65,6 +65,11 @@ inject_certs() {
 #    démarre le launcher officiel ; on l'arrête dès que les fichiers sont présents.
 # ---------------------------------------------------------------------------
 if [ ! -x "$RUNTIME_JAVA" ] || [ ! -f "$LAUNCHER_JAR" ]; then
+    if [ ! -f "$BOOTSTRAP_JAR" ]; then
+        echo "Bootstrap introuvable : $BOOTSTRAP_JAR" >&2
+        echo "Place « Paladium Games Launcher.jar » (téléchargé depuis le site Paladium) dans le dossier Launcher/ — voir le README." >&2
+        exit 1
+    fi
     echo "[install] première installation : lancement du bootstrap pour télécharger le runtime + launcher…"
     java -jar "$BOOTSTRAP_JAR" &
     BOOT_PID=$!
