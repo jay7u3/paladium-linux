@@ -1,0 +1,16 @@
+# --- Binaires propriétaires Paladium (NON redistribués) ---
+# Récupérés automatiquement par le bootstrap, ou à placer soi-même (voir README).
+Launcher/
+patches/
+linux-natives/
+*.exe
+*.jar
+*.pala
+*.so
+
+# --- Réglages locaux Claude Code ---
+.claude/
+
+# --- Divers ---
+*.log
+*.tmp
